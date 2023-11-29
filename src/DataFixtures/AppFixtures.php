@@ -77,6 +77,23 @@ class AppFixtures extends Fixture
         $user3->setClasse($classe3);
         $manager->persist($user3);
 
+        $mission1 = new Mission();
+        $mission1->setNom('Éradication des Gobelin');
+        $mission1->setDescription('Eliminer 20 ennemies appartenant à la faction des Gobelins.');
+        $mission1->setClasse($classe2);
+        $manager->persist($mission1);
+
+        $mission2 = new Mission();
+        $mission2->setNom('hasse au Dragon');
+        $mission2->setDescription('Eliminer le dragon qui terrorise le village (peut être effectué à plusieurs).');
+        $mission2->setClasse($classe2);
+        $manager->persist($mission2);
+
+        $mission3 = new Mission();
+        $mission3->setNom('Recherche des Vestiges Magiques');
+        $mission3->setDescription("Les Érudits sont chargés de localiser et d'étudier des vestiges magiques anciens dans une région mystérieuse.");
+        $mission3->setClasse($classe4);
+        $manager->persist($mission3);
 
         $manager->flush();
     }
