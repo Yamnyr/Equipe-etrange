@@ -15,41 +15,39 @@
     <body>
     <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="#">Navbare</a>
+            <a class="navbar-brand" href="#">Equipe-Etrange</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav">
                     <li class="nav-item active">
-                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="app_classes">Accueil <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Features</a>
+                        <a class="nav-link" href="app_classes">Classes</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Pricing</a>
+                        <a class="nav-link" href="#">Mission</a>
                     </li>
-                    {% if is_granted("ROLE_ADMIN") %}
+                    {% if is_granted('ROLE_ADMIN') %}
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Dropdown link
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Admin
                             </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <a class="dropdown-item" href="#">Action</a>
-                                <a class="dropdown-item" href="#">Another action</a>
-                                <a class="dropdown-item" href="#">Something else here</a>
-                            </div>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href={{ path('app_user_index')}}>Liste Users</a></li>
+                                <li><a class="dropdown-item" href={{ path('app_mission_index')}}>Liste Missions</a></li>
+                            </ul>
                         </li>
                     {% endif %}
                 </ul>
-                {% if app.user %}
-                    {# Utilisateur connecté : afficher le bouton de déconnexion et le lien vers le compte #}
-                    <a href="{{ path('app_logout') }}">Déconnexion</a>
-                    <a href="{{ path('') }}">Mon Compte</a>
+                {% if app.user is null %}
+                    <a class="btn btn-primary" href={{ path('app_login') }}>Se Connecter</a>
+                    <a class="btn btn-primary" href={{ path('app_register') }}>Inscription</a>
                 {% else %}
-                    {# Utilisateur déconnecté : afficher le bouton de connexion #}
-                    <a href="{{ path('app_login') }}">Se Connecter</a>
+                    <a class="nav-link" href={{ path('app_compte')}}>Mon Compte</a>
+                    <a class="btn btn-danger" href={{ path('app_logout') }}>Se Déconnecter</a>
                 {% endif %}
             </div>
         </nav>
