@@ -17,12 +17,6 @@ class AppFixtures extends Fixture
     }
     public function load(ObjectManager $manager): void
     {
-        // Création d'une classe
-        $classe1 = new Classe();
-        $classe1->setNom('alchimistes');
-        $classe1->setImage('images/alchimistes.png');
-        $manager->persist($classe1);
-
 
         $classe2 = new Classe();
         $classe2->setNom('aventuriers');
@@ -50,7 +44,7 @@ class AppFixtures extends Fixture
                 'test'
             )
         );
-        $user1->setClasse($classe1);
+        $user1->setClasse($classe2);
         $manager->persist($user1);
 
         $user2 = new User();
@@ -94,6 +88,15 @@ class AppFixtures extends Fixture
         $mission3->setDescription("Les Érudits sont chargés de localiser et d'étudier des vestiges magiques anciens dans une région mystérieuse.");
         $mission3->setClasse($classe4);
         $manager->persist($mission3);
+
+
+        // Création d'une classe
+        $classe1 = new Classe();
+        $classe1->setNom('alchimistes');
+        $classe1->setImage('images/alchimistes.png');
+        $classe1->setMdj($mission3);
+        $manager->persist($classe1);
+
 
         $manager->flush();
     }
