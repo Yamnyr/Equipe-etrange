@@ -78,6 +78,13 @@ class AppFixtures extends Fixture
         $user3->setClasse($classe3);
         $manager->persist($user3);
 
+        $mission3 = new Mission();
+        $mission3->setNom('test');
+        $mission3->setDescription('Eazeazeazeazeusieurs).');
+        $mission3->setClasse($classe2);
+        $manager->persist($mission3);
+
+
         $mission1 = new Mission();
         $mission1->setNom('Éradication des Gobelin');
         $mission1->setDescription('Eliminer 20 ennemies appartenant à la faction des Gobelins.');
