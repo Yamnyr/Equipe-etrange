@@ -25,21 +25,15 @@ class MdjController extends AbstractController
         $mdj = $classe ? $classe->getMdj() : null;
         $dateajout = $classe ? $classe->getDateAjout() : null;
 
-        if ($mdj === null || (new \DateTime())->diff($dateajout)->s > 20) {
+        if ($mdj === null || (new \DateTime())->diff($dateajout)->s > 60) {
 
-            //si rien dans historique
-            //user perd 1 pv
-            //+ajout dans historique ->resultat->0
 
             $hist = $historiqueRepository->findBy(['user' => $user]);
-//            dd($hist);
-//            dd($user->getId());
-//            dd($hist[0]->getUser()->getId(), $user->getId());
-//            dd($classe->getMdj()->getId(), $hist[0]->getMission()->getId());
-//            dd($classe->getDateAjout(),$hist[0]->getDateAjoutMdj());
-
-            if (!isset($histe) || $user->getId() !== $hist[0]->getUser()->getId() && $classe->getMdj()->getId() !== $hist[0]->getMission()->getId() && $classe->getDateAjout() !== $hist[0]->getDateAjoutMdj())
-                {
+            //si la mission du jour n'est pas set
+            if ($classe !== null && $classe->getMdj() !== null) {
+//dd($historiqueRepository->doesEntryExist($user, $classe->getMdj(), $classe->getDateAjout()));
+                var_dump(!$historiqueRepository->doesEntryExist($user, $classe->getMdj(), $classe->getDateAjout()));
+                if (empty($hist) || !$historiqueRepository->doesEntryExist($user, $classe->getMdj(), $classe->getDateAjout())) {
                     $historique = new Historique();
 
                     $historique->setUser($user);
@@ -48,13 +42,15 @@ class MdjController extends AbstractController
                     $historique->setResultat(False);
 
                     $entityManager->persist($historique);
+
+                    $user->setPv($user->getPv() - 1);
+                    $entityManager->persist($user);
+
                     $entityManager->flush();
 
+                    $this->addFlash('réussit', "tu n'as validé ta mission à temps");
                 }
-
-
-
-//si id_user != historique && id mission != hitorique && date_ajout...
+            }
 
             $relatedMissions = $missionRepository->findBy(['classe' => $classe]);
             if (!empty($relatedMissions)) {
@@ -65,9 +61,7 @@ class MdjController extends AbstractController
                 $classe->setDateAjout(new \DateTime());
                 $entityManager->persist($classe);
                 $entityManager->flush();
-
-//                $mdj = $classe->getMdj();
-//                dd($classe);
+                $this->addFlash('réussit', "mission mis à jour");
             }
         }
 
@@ -78,22 +72,25 @@ class MdjController extends AbstractController
     }
 
     #[Route('/mdj/{id}/valide', name: 'app_mdj_valid')]
-    public function add($id, MissionRepository $missionRepository, EntityManagerInterface $entityManager, ClasseRepository $classeRepository,): Response
+    public function add($id, MissionRepository $missionRepository, EntityManagerInterface $entityManager, ClasseRepository $classeRepository, HistoriqueRepository $historiqueRepository): Response
     {
-
         $user = $this->getUser();
 
-        $classe = $classeRepository->find($id);
-        $historique = new Historique();
+        $classe = $user ? $user->getClasse() : null;
+        var_dump(!$historiqueRepository->doesEntryExist($user, $classe->getMdj(), $classe->getDateAjout()));
+        if (!$historiqueRepository->doesEntryExist($user, $classe->getMdj(), $classe->getDateAjout())) {
+            $classe = $classeRepository->find($id);
+            $historique = new Historique();
 
-        $historique->setUser($user);
-        $historique->setMission($classe->getMdj());
-        $historique->setDateAjoutMdj($classe->getDateAjout());
-        $historique->setResultat(True);
+            $historique->setUser($user);
+            $historique->setMission($classe->getMdj());
+            $historique->setDateAjoutMdj($classe->getDateAjout());
+            $historique->setResultat(True);
 
-        $entityManager->persist($historique);
-        $entityManager->flush();
-
+            $entityManager->persist($historique);
+            $entityManager->flush();
+            $this->addFlash('réussit', "La mission a été validé");
+        }
         return $this->redirectToRoute('app_mdj', [], Response::HTTP_SEE_OTHER);
     }
 }

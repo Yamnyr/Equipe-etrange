@@ -3,6 +3,8 @@
 namespace App\Repository;
 
 use App\Entity\Historique;
+use App\Entity\Mission;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -21,6 +23,31 @@ class HistoriqueRepository extends ServiceEntityRepository
         parent::__construct($registry, Historique::class);
     }
 
+    /**
+     * Vérifie si une ligne avec les mêmes informations et la même date existe déjà.
+     *
+     * @param User $user
+     * @param Mission $mission
+     * @param \DateTimeInterface $dateAjoutMdj
+     * @return bool
+     */
+    public function doesEntryExist(User $user, Mission $mission, \DateTimeInterface $dateAjoutMdj): bool
+    {
+        $result = $this->createQueryBuilder('h')
+            ->select('COUNT(h.id) as count')
+            ->andWhere('h.user = :user')
+            ->andWhere('h.mission = :mission')
+            ->andWhere('h.date_ajout_mdj = :dateAjoutMdj')
+            ->setParameters([
+                'user' => $user,
+                'mission' => $mission,
+                'dateAjoutMdj' => $dateAjoutMdj,
+            ])
+            ->getQuery()
+            ->getScalarResult();
+
+        return $result[0]['count'] > 0;
+    }
 //    /**
 //     * @return Historique[] Returns an array of Historique objects
 //     */
