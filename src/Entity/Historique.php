@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\HistoriqueRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: HistoriqueRepository::class)]
@@ -21,6 +22,9 @@ class Historique
 
     #[ORM\Column(nullable: true)]
     private ?bool $resultat = null;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $date_ajout_mdj = null;
 
     public function getId(): ?int
     {
@@ -59,6 +63,18 @@ class Historique
     public function setResultat(?bool $resultat): static
     {
         $this->resultat = $resultat;
+
+        return $this;
+    }
+
+    public function getDateAjoutMdj(): ?\DateTimeInterface
+    {
+        return $this->date_ajout_mdj;
+    }
+
+    public function setDateAjoutMdj(?\DateTimeInterface $date_ajout_mdj): static
+    {
+        $this->date_ajout_mdj = $date_ajout_mdj;
 
         return $this;
     }

@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Historique;
 use App\Entity\User;
 use App\Repository\ClasseRepository;
 use App\Repository\MissionRepository;
@@ -35,13 +36,34 @@ class MdjController extends AbstractController
                 $entityManager->persist($classe);
                 $entityManager->flush();
 
-                $mdj = $classe->getMdj();
+//                $mdj = $classe->getMdj();
+//                dd($classe);
             }
         }
 
 
         return $this->render('mdj/index.html.twig', [
-            'mdj' => $mdj,
+            'classe' => $classe,
         ]);
+    }
+
+    #[Route('/mdj/{id}/valide', name: 'app_mdj_valid')]
+    public function add($id, MissionRepository $missionRepository, EntityManagerInterface $entityManager, ClasseRepository $classeRepository,): Response
+    {
+
+        $user = $this->getUser();
+
+        $classe = $classeRepository->find($id);
+        $historique = new Historique();
+
+        $historique->setUser($user);
+        $historique->setMission($classe->getMdj());
+        $historique->setDateAjoutMdj($classe->getDateAjout());
+        $historique->setResultat(True);
+
+        $entityManager->persist($historique);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('app_mdj', [], Response::HTTP_SEE_OTHER);
     }
 }
