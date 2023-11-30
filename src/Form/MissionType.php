@@ -15,7 +15,6 @@ class MissionType extends AbstractType
             ->add('nom')
             ->add('description')
             ->add('classe')
-            ->add('mdjclasse')
         ;
     }
 
