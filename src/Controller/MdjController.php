@@ -21,15 +21,16 @@ class MdjController extends AbstractController
 
         $classe = $user ? $user->getClasse() : null;
         $mdj = $classe ? $classe->getMdj() : null;
+        $dateajout = $classe ? $classe->getDateAjout() : null;
 
+        if ($mdj === null || (new \DateTime())->diff($dateajout)->s > 10) {
+            $relatedMissions = $missionRepository->findBy(['classe' => $classe]);
 
-        // If $mdj is null, let's find a mission related to the class and assign it as the $mdj
-        if ($mdj === null) {
+            if (!empty($relatedMissions)) {
+                $randomKey = array_rand($relatedMissions);
+                $randomMission = $relatedMissions[$randomKey];
 
-            $relatedMission = $missionRepository->findOneBy(['classe' => $classe]);
-            // Assuming $relatedMission is the mission you want to assign as $mdj
-            if ($relatedMission !== null) {
-                $classe->setMdj($relatedMission);
+                $classe->setMdj($randomMission);
                 $classe->setDateAjout(new \DateTime());
                 $entityManager->persist($classe);
                 $entityManager->flush();
@@ -37,6 +38,7 @@ class MdjController extends AbstractController
                 $mdj = $classe->getMdj();
             }
         }
+
 
         return $this->render('mdj/index.html.twig', [
             'mdj' => $mdj,
