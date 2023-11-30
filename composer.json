@@ -57,6 +57,18 @@
             "cache:clear": "symfony-cmd",
             "assets:install %PUBLIC_DIR%": "symfony-cmd"
         },
+        "recreate-db": [
+
+            "echo Dropping database...",
+            "php bin/console doctrine:database:drop --force",
+            "echo Creating database...",
+            "php bin/console doctrine:database:create",
+            "echo Running migrations...",
+            "php bin/console make:migration --no-interaction",
+            "php bin/console doctrine:migrations:migrate --no-interaction",
+            "echo Loading fixtures...",
+            "php bin/console doctrine:fixtures:load --no-interaction"
+        ],
         "post-install-cmd": [
             "@auto-scripts"
         ],
