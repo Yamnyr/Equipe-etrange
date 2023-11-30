@@ -23,7 +23,7 @@ class Classe
     private Collection $missions;
 
     #[ORM\OneToOne(inversedBy: 'mdjclasse', cascade: ['persist', 'remove'])]
-    private ?Mission $mdj = null;
+        private ?Mission $mdj = null;
 
     #[ORM\OneToMany(mappedBy: 'classe', targetEntity: User::class)]
     private Collection $users;
