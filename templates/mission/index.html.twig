@@ -11,6 +11,7 @@
                 <th>Id</th>
                 <th>Nom</th>
                 <th>Description</th>
+                <th>Classe</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -20,6 +21,7 @@
                 <td>{{ mission.id }}</td>
                 <td>{{ mission.nom }}</td>
                 <td>{{ mission.description }}</td>
+                <td>{{ mission.classe }}</td>
                 <td>
                     <a href="{{ path('app_mission_show', {'id': mission.id}) }}">show</a>
                     <a href="{{ path('app_mission_edit', {'id': mission.id}) }}">edit</a>
