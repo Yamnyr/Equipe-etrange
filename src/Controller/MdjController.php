@@ -32,7 +32,7 @@ class MdjController extends AbstractController
             //si la mission du jour n'est pas set
             if ($classe !== null && $classe->getMdj() !== null) {
 //dd($historiqueRepository->doesEntryExist($user, $classe->getMdj(), $classe->getDateAjout()));
-                //var_dump(!$historiqueRepository->doesEntryExist($user, $classe->getMdj(), $classe->getDateAjout()));
+//                var_dump(!$historiqueRepository->doesEntryExist($user, $classe->getMdj(), $classe->getDateAjout()));
                 if (empty($hist) || !$historiqueRepository->doesEntryExist($user, $classe->getMdj(), $classe->getDateAjout())) {
                     $historique = new Historique();
 
