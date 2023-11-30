@@ -2,7 +2,9 @@
 
 namespace App\Form;
 
+use App\Entity\Classe;
 use App\Entity\User;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
@@ -25,6 +27,11 @@ class RegistrationFormType extends AbstractType
                         'message' => 'You should agree to our terms.',
                     ]),
                 ],
+            ])
+            ->add('classe', EntityType::class, [
+                'class' => Classe::class,
+                'choice_label' => 'nom', // Champs à afficher dans la liste déroulante
+                'placeholder' => 'Choose your class', // Texte par défaut
             ])
             ->add('plainPassword', PasswordType::class, [
                 // instead of being set onto the object directly,
