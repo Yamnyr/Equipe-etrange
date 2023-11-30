@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Classe;
 use App\Entity\Mission;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -19,6 +20,20 @@ class MissionRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Mission::class);
+    }
+    /**
+     * Find a mission related to the given class.
+     *
+     * @param Classe $classe
+     * @return Mission|null
+     */
+    public function findMissionByClass(Classe $classe): ?Mission
+    {
+        return $this->createQueryBuilder('m')
+            ->andWhere('m.classe = :classe')
+            ->setParameter('classe', $classe)
+            ->getQuery()
+            ->getOneOrNullResult();
     }
 
 //    /**

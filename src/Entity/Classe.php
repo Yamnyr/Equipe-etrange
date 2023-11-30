@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\ClasseRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ClasseRepository::class)]
@@ -29,6 +30,9 @@ class Classe
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $image = null;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $date_ajout = null;
 
     public function __construct()
     {
@@ -139,5 +143,17 @@ class Classe
     public function __toString(): string 
     {
         return $this->nom;
+    }
+
+    public function getDateAjout(): ?\DateTimeInterface
+    {
+        return $this->date_ajout;
+    }
+
+    public function setDateAjout(?\DateTimeInterface $date_ajout): static
+    {
+        $this->date_ajout = $date_ajout;
+
+        return $this;
     }
 }
