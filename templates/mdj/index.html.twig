@@ -9,7 +9,8 @@
 </style>
 
 <div class="example-wrapper">
-    <h1></h1>
-{{ mdj.description }}
+    <h1>{{ classe.mdj.nom }}</h1>
+    {{ classe.mdj.description }}
+    <a class="btn btn-primary" href="{{ path('app_mdj_valid', {'id': classe.id}) }}">Validé</a>
 </div>
 {% endblock %}
