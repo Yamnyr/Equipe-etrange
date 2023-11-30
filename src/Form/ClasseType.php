@@ -15,6 +15,7 @@ class ClasseType extends AbstractType
             ->add('nom')
             ->add('image')
             ->add('mdj')
+            ->add('description')
         ;
     }
 
