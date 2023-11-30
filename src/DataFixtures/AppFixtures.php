@@ -46,7 +46,7 @@ class AppFixtures extends Fixture
                 'test'
             )
         );
-        $user1->setClasse($classe3);
+        $user1->setClasse($classe2);
         $manager->persist($user1);
 
         $user2 = new User();
@@ -95,7 +95,7 @@ class AppFixtures extends Fixture
         $mission4->setNom('Mettre un 20/20 au groupe 3 :');
         $mission4->setDescription('Mettre un 20/20 sur le projet du groupe 3 (svp) #lesmeilleurs.');
         $mission4->setClasse($classe1);
-        $manager>persist($mission4);
+        $manager->persist($mission4);
         
         $mission5 = new Mission();
         $mission5->setNom('Répondre aux courriels étudiants :');
