@@ -46,7 +46,7 @@ class AppFixtures extends Fixture
                 'test'
             )
         );
-        $user1->setClasse($classe2);
+        $user1->setClasse($classe3);
         $manager->persist($user1);
 
         $user2 = new User();
