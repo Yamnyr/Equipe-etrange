@@ -23,16 +23,19 @@ class AppFixtures extends Fixture
         $classe1 = new Classe();
         $classe1->setNom('Enseignants');
         $classe1->setImage('images/enseignants.png');
+        $classe1->setDescription('Les enseignants.');
         $manager->persist($classe1);
 
         $classe2 = new Classe();
         $classe2->setNom('Elèves');
         $classe2->setImage('images/eleves.png');
+        $classe2->setDescription('Les élèves.');
         $manager->persist($classe2);
 
         $classe3 = new Classe();
         $classe3->setNom('Administration');
         $classe3->setImage('images/administration.png');
+        $classe3->setDescription('L\'administration.');
         $manager->persist($classe3);
 
 

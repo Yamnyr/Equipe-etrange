@@ -34,6 +34,9 @@ class Classe
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $date_ajout = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $description = null;
+
     public function __construct()
     {
         $this->missions = new ArrayCollection();
@@ -153,6 +156,18 @@ class Classe
     public function setDateAjout(?\DateTimeInterface $date_ajout): static
     {
         $this->date_ajout = $date_ajout;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(string $description): static
+    {
+        $this->description = $description;
 
         return $this;
     }
