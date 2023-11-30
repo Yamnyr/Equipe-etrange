@@ -21,24 +21,19 @@ class AppFixtures extends Fixture
 
         // Création d'une classe
         $classe1 = new Classe();
-        $classe1->setNom('alchimistes');
-        $classe1->setImage('images/alchimistes.png');
+        $classe1->setNom('Enseignants');
+        $classe1->setImage('images/enseignants.png');
         $manager->persist($classe1);
 
         $classe2 = new Classe();
-        $classe2->setNom('aventuriers');
-        $classe2->setImage('images/aventuriers.png');
+        $classe2->setNom('Elèves');
+        $classe2->setImage('images/eleves.png');
         $manager->persist($classe2);
 
         $classe3 = new Classe();
-        $classe3->setNom('enchanteurs');
-        $classe3->setImage('images/enchanteurs.png');
+        $classe3->setNom('Administration');
+        $classe3->setImage('images/administration.png');
         $manager->persist($classe3);
-
-        $classe4 = new Classe();
-        $classe4->setNom('erudits');
-        $classe4->setImage('images/erudits.png');
-        $manager->persist($classe4);
 
 
         $user1 = new User();
@@ -78,29 +73,22 @@ class AppFixtures extends Fixture
         $user3->setClasse($classe3);
         $manager->persist($user3);
 
-        $mission3 = new Mission();
-        $mission3->setNom('test');
-        $mission3->setDescription('Eazeazeazeazeusieurs).');
-        $mission3->setClasse($classe2);
-        $manager->persist($mission3);
-
-
         $mission1 = new Mission();
-        $mission1->setNom('Éradication des Gobelin');
-        $mission1->setDescription('Eliminer 20 ennemies appartenant à la faction des Gobelins.');
-        $mission1->setClasse($classe2);
+        $mission1->setNom('Mettre un 20/20 au groupe 3 :');
+        $mission1->setDescription('Mettre un 20/20 sur le projet du groupe 3 (svp) #lesmeilleurs.');
+        $mission1->setClasse($classe1);
         $manager->persist($mission1);
 
         $mission2 = new Mission();
-        $mission2->setNom('Chasse au Dragon');
-        $mission2->setDescription('Eliminer le dragon qui terrorise le village (peut être effectué à plusieurs).');
+        $mission2->setNom('Arriver à l\'heure :');
+        $mission2->setDescription('Tout simplement.');
         $mission2->setClasse($classe2);
         $manager->persist($mission2);
 
         $mission3 = new Mission();
-        $mission3->setNom('Traduction des Écritures Antiques');
-        $mission3->setDescription("Décoder et traduire des parchemins anciens pour comprendre les secrets d'une civilisation perdue.");
-        $mission3->setClasse($classe4);
+        $mission3->setNom('Évaluer les performances des élèves :');
+        $mission3->setDescription("Examiner et noter 10 travaux des élèves, identifier les besoins individuels et préparer des rapports de progrès.");
+        $mission3->setClasse($classe3);
         $manager->persist($mission3);
 
         $mission4 = new Mission();
