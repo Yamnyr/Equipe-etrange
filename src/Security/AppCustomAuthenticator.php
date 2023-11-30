@@ -46,7 +46,7 @@ class AppCustomAuthenticator extends AbstractLoginFormAuthenticator
         }
 
         // For example:
-        return new RedirectResponse($this->urlGenerator->generate('app_user_index'));
+        return new RedirectResponse($this->urlGenerator->generate('app_classes'));
         
     }
 

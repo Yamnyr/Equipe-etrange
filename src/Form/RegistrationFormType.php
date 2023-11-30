@@ -20,14 +20,6 @@ class RegistrationFormType extends AbstractType
     {
         $builder
             ->add('email')
-            ->add('agreeTerms', CheckboxType::class, [
-                'mapped' => false,
-                'constraints' => [
-                    new IsTrue([
-                        'message' => 'You should agree to our terms.',
-                    ]),
-                ],
-            ])
             ->add('classe', EntityType::class, [
                 'class' => Classe::class,
                 'choice_label' => 'nom', // Champs à afficher dans la liste déroulante
