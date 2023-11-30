@@ -25,14 +25,14 @@ class MdjController extends AbstractController
         $mdj = $classe ? $classe->getMdj() : null;
         $dateajout = $classe ? $classe->getDateAjout() : null;
 
-        if ($mdj === null || (new \DateTime())->diff($dateajout)->s > 60) {
+        if ($mdj === null || (new \DateTime())->diff($dateajout)->s > 3) {
 
 
             $hist = $historiqueRepository->findBy(['user' => $user]);
             //si la mission du jour n'est pas set
             if ($classe !== null && $classe->getMdj() !== null) {
 //dd($historiqueRepository->doesEntryExist($user, $classe->getMdj(), $classe->getDateAjout()));
-                var_dump(!$historiqueRepository->doesEntryExist($user, $classe->getMdj(), $classe->getDateAjout()));
+//                var_dump(!$historiqueRepository->doesEntryExist($user, $classe->getMdj(), $classe->getDateAjout()));
                 if (empty($hist) || !$historiqueRepository->doesEntryExist($user, $classe->getMdj(), $classe->getDateAjout())) {
                     $historique = new Historique();
 
@@ -48,7 +48,7 @@ class MdjController extends AbstractController
 
                     $entityManager->flush();
 
-                    $this->addFlash('réussit', "tu n'as validé ta mission à temps");
+                    $this->addFlash('danger', "tu n'as validé ta mission à temps");
                 }
             }
 
@@ -61,7 +61,7 @@ class MdjController extends AbstractController
                 $classe->setDateAjout(new \DateTime());
                 $entityManager->persist($classe);
                 $entityManager->flush();
-                $this->addFlash('réussit', "mission mis à jour");
+                $this->addFlash('warning', "mission mis à jour");
             }
         }
 
