@@ -16,6 +16,12 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class MdjController extends AbstractController
 {
+
+    public function __construct(EntityManagerInterface $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
+
     #[Route('/mdj', name: 'app_mdj')]
     public function index(Security $security, MissionRepository $missionRepository, EntityManagerInterface $entityManager, HistoriqueRepository $historiqueRepository): Response
     {
@@ -26,7 +32,7 @@ class MdjController extends AbstractController
         $dateajout = $classe ? $classe->getDateAjout() : null;
 
         $status = false;
-        if ($mdj === null || (new \DateTime())->diff($dateajout)->s > 10) {
+        if ($mdj === null || (new \DateTime())->diff($dateajout)->s > 15) {
 
 
             $hist = $historiqueRepository->findBy(['user' => $user]);
@@ -44,7 +50,20 @@ class MdjController extends AbstractController
                     $entityManager->persist($historique);
 
                     $user->setPv($user->getPv() - 1);
+
+                    /*$userRepository = $this->entityManager->getRepository(User::class);
+                    $usersToDelete = $userRepository->findBy(['pv' => -6]);
+            
+                    foreach ($usersToDelete as $user) {
+                        $this->entityManager->remove($user);
+                        
+                    }
+                    $this->entityManager->flush();
+                    //return $this->redirectToRoute('app_logout', [], Response::HTTP_SEE_OTHER);*/
+
                     $entityManager->persist($user);
+
+                    //echo $user->getPv();
 
                     $entityManager->flush();
 
