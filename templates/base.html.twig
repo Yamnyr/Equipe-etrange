@@ -94,12 +94,21 @@
                         </li>
                     {% endif %}
                 </ul>
-                <ul class="compte m-2">
+                <ul class="compte m-2 navbar-nav ">
                     {% if app.user is null %}
                         <a class="btn btn-primary" href={{ path('app_login') }}>Se Connecter</a>
                         <a class="btn btn-primary" href={{ path('app_register') }}>Inscription</a>
                     {% else %}
-                        <a class="btn " id="bouton" href={{ path('app_compte')}}>Mon Compte</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Profile
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="btn " id="bouton" href={{ path('app_compte')}}>Mon Compte</a></li>
+                                <li><a class="dropdown-item" href={{ path('app_compte_historique')}}>Mon historique</a></li>
+                            </ul>
+                        </li>
+{#                        <a class="btn " id="bouton" href={{ path('app_compte')}}>Mon Compte</a>#}
                         <a class="btn btn-danger" id="bouton" href={{ path('app_logout') }}>Se Déconnecter</a>
                     {% endif %}
                 </ul>
