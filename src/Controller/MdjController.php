@@ -34,7 +34,7 @@ class MdjController extends AbstractController
         $dateajout = $classe ? $classe->getDateAjout() : null;
 
         $status = false;
-        if ($mdj === null || (new \DateTime())->diff($dateajout)->s > 2) {
+        if ($mdj === null || (new \DateTime())->diff($dateajout)->s > 15) {
 
 
             $hist = $historiqueRepository->findBy(['user' => $user]);
@@ -52,7 +52,6 @@ class MdjController extends AbstractController
                         $entityManager->remove($user);
                         $entityManager->flush();
                         $this->addFlash('danger', "tu n'as plus de point de vies, ton compte à été supprimer");
-// Delay the redirection for a few seconds (you can adjust the delay)
 
                         return $this->redirectToRoute('app_logout', [], Response::HTTP_SEE_OTHER);
 
@@ -71,32 +70,6 @@ class MdjController extends AbstractController
                         $entityManager->flush();
                     }
 
-
-//                    $historique = new Historique();
-//
-//                    $historique->setUser($user);
-//                    $historique->setMission($classe->getMdj());
-//                    $historique->setDateAjoutMdj($classe->getDateAjout());
-//                    $historique->setResultat(False);
-//
-//                    $entityManager->persist($historique);
-//
-//                    $user->setPv($user->getPv() - 1);
-//                    if ($user->getPv()<= 0){
-//
-//                        $historiqueRepository->deleteEntriesByUser($user);
-//                        $entityManager->remove($user);
-//                        $entityManager->flush();
-////                        return $this->redirectToRoute('app_logout', [], Response::HTTP_SEE_OTHER);
-//                    }
-//                    else{
-//
-//                        var_dump($user->getPv());
-//                        $entityManager->persist($user);
-//                        $entityManager->flush();
-//
-//                    }
-//
                     $entityManager->flush();
 
                     $this->addFlash('danger', "tu n'as validé ta mission à temps, il te reste: " .$user->getPv()." points de vie");

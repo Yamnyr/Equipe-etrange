@@ -64,9 +64,6 @@ class HistoriqueRepository extends ServiceEntityRepository
             ->execute();
     }
 
-
-
-
     public function countSuccessfulMissionsForClass(int $classId): int
     {
         return $this->createQueryBuilder('h')

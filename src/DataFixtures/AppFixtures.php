@@ -34,12 +34,6 @@ class AppFixtures extends Fixture
         $classe2->setDescription('Les Réseaux.');
         $manager->persist($classe2);
 
-        /*$classe3 = new Classe();
-        $classe3->setNom('Administration');
-        $classe3->setImage('images/administration.png');
-        $classe3->setDescription('L\'administration.');
-        $manager->persist($classe3);*/
-
 
         $user1 = new User();
         $user1->setEmail('dev@admin');
@@ -67,19 +61,6 @@ class AppFixtures extends Fixture
         $user2->setClasse($classe2);
         $manager->persist($user2);
 
-        /*$user3 = new User();
-        $user3->setEmail('admin@admin');
-        $user3->setPv(3);
-        $user3->setRoles(array('ROLE_ADMIN'));
-        $user3->setPassword(
-            $this->password->hashPassword(
-                $user3,
-                'admin.admin'
-            )
-        );
-        $user3->setClasse($classe3);
-        $manager->persist($user3);*/
-
         $user4 = new User();
         $user4->setEmail('dev@user');
         $user4->setPv(3);
@@ -104,19 +85,7 @@ class AppFixtures extends Fixture
         $user5->setClasse($classe2);
         $manager->persist($user5);
 
-        /*$user6 = new User();
-        $user6->setEmail('admin@user');
-        $user6->setPv(3);
-        $user6->setPassword(
-            $this->password->hashPassword(
-                $user3,
-                'admin.user'
-            )
-        );
-        $user6->setClasse($classe3);
-        $manager->persist($user6);*/
 
-        
 
         $mission1 = new Mission();
         $mission1->setNom('Entrée Théâtrale Épique');
@@ -193,35 +162,6 @@ class AppFixtures extends Fixture
         $mission11->setClasse($classe2);
         $manager->persist($mission11);
 
-        /*$mission11 = new Mission();
-        $mission11->setNom('Organiser une réunion de planification :');
-        $mission11->setDescription("Coordonner les activités pédagogiques du mois en cours, définir les priorités et allouer les ressources nécessaires.");
-        $mission11->setClasse($classe3);
-        $manager->persist($mission11);
-
-        $mission12 = new Mission();
-        $mission12->setNom('Évaluer les performances des élèves :');
-        $mission12->setDescription("Examiner et noter 10 travaux des élèves, identifier les besoins individuels et préparer des rapports de progrès.");
-        $mission12->setClasse($classe3);
-        $manager->persist($mission12);
-
-        $mission13 = new Mission();
-        $mission13->setNom('Répondre aux demandes des parents :');
-        $mission13->setDescription("Répondre à 20 parents, fournir des informations sur le progrès académique de leurs enfants et offrir un soutien en cas de besoin.");
-        $mission13->setClasse($classe3);
-        $manager->persist($mission13);
-
-        $mission14 = new Mission();
-        $mission14->setNom('Coordonner un atelier pédagogique :');
-        $mission14->setDescription("Effectuer une session de développement professionnel pour partager les meilleures pratiques pédagogiques, introduire de nouvelles méthodologies et renforcer les compétences des enseignants.");
-        $mission14->setClasse($classe3);
-        $manager->persist($mission14);
-
-        $mission15 = new Mission();
-        $mission15->setNom('Analyser les dossiers scolaires :');
-        $mission15->setDescription("Examiner 10 dossiers de performance scolaire, identifier les problèmes, et proposer des ajustements stratégiques pour améliorer l'apprentissage des élèves.");
-        $mission15->setClasse($classe3);
-        $manager->persist($mission15);*/
 
         $historique1 = new Historique();
         $historique1->setUser($user4);

@@ -23,7 +23,7 @@ class RegistrationFormType extends AbstractType
             ->add('classe', EntityType::class, [
                 'class' => Classe::class,
                 'choice_label' => 'nom', // Champs à afficher dans la liste déroulante
-                'placeholder' => 'Choose your class', // Texte par défaut
+                'placeholder' => 'Choississez votre classe', // Texte par défaut
             ])
             ->add('plainPassword', PasswordType::class, [
                 // instead of being set onto the object directly,

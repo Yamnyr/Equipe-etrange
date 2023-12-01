@@ -36,4 +36,17 @@ Lancer le serveur
 symfony serve
 ```
 
+## acces : 
+
+compte admin:
+user: dev@admin
+mdp: dev.admin
+
+compte user classe 1:
+user: dev@user
+mdp: dev.user
+
+compte user classe 2:
+user: res@user
+mdp: res.user
 
