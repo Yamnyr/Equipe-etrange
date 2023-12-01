@@ -36,7 +36,7 @@ class CompteController extends AbstractController
 
             $this->addFlash('réussit', "la modification a bien été effectué");
 
-            return $this->redirectToRoute('app_user_edit_profile', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_compte', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('compte/index.html.twig', [
