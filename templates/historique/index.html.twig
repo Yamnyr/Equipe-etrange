@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Historique index{% endblock %}
+
+{% block body %}
+<div class="p-4">
+
+    <h1 class="h3 mb-3 fw-bold">Historique</h1>
+    <div class="table">
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>user</th>
+                <th>mission</th>
+                <th>Resultat</th>
+                <th>Date_ajout_mdj</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for historique in historiques|reverse %}
+            <tr>
+                <td>{{ historique.id }}</td>
+                <td>{{ historique.user }}</td>
+                <td>{{ historique.mission }}</td>
+                <td>{{ historique.resultat ? 'Yes' : 'No' }}</td>
+                <td>{{ historique.dateAjoutMdj ? historique.dateAjoutMdj|date('Y-m-d H:i:s') : '' }}</td>
+{#                <td>
+                    <a href="{{ path('app_historique_show', {'id': historique.id}) }}">show</a>
+                    <a href="{{ path('app_historique_edit', {'id': historique.id}) }}">edit</a>
+                </td>#}
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">Pas d'historique</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </div>
+</div>
+
+{#    <a class="btn btn-primary" href="{{ path('app_historique_new') }}">Create new</a>#}
+{% endblock %}
