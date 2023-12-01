@@ -13,13 +13,15 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class MdjController extends AbstractController
 {
-
-    public function __construct(EntityManagerInterface $entityManager)
+    private TokenStorageInterface $tokenStorage;
+    public function __construct(EntityManagerInterface $entityManager, TokenStorageInterface $tokenStorage)
     {
         $this->entityManager = $entityManager;
+        $this->tokenStorage = $tokenStorage;
     }
 
     #[Route('/mdj', name: 'app_mdj')]
@@ -32,7 +34,7 @@ class MdjController extends AbstractController
         $dateajout = $classe ? $classe->getDateAjout() : null;
 
         $status = false;
-        if ($mdj === null || (new \DateTime())->diff($dateajout)->s > 15) {
+        if ($mdj === null || (new \DateTime())->diff($dateajout)->s > 2) {
 
 
             $hist = $historiqueRepository->findBy(['user' => $user]);
@@ -40,34 +42,64 @@ class MdjController extends AbstractController
             if ($classe !== null && $classe->getMdj() !== null) {
 
                 if (empty($hist) || !$historiqueRepository->doesEntryExist($user, $classe->getMdj(), $classe->getDateAjout())) {
-                    $historique = new Historique();
+                    if ($user->getPv() <= 0) {
+                        // Delete history entries associated with the user
+                        $historiqueRepository->deleteEntriesByUser($user);
+                        $this->tokenStorage->setToken(null);
+                        // Log out the user before removing and flushing
+                        $this->tokenStorage->setToken(null);
 
-                    $historique->setUser($user);
-                    $historique->setMission($classe->getMdj());
-                    $historique->setDateAjoutMdj($classe->getDateAjout());
-                    $historique->setResultat(False);
+                        $entityManager->remove($user);
+                        $entityManager->flush();
+                        $this->addFlash('danger', "tu n'as plus de point de vies, ton compte à été supprimer");
+// Delay the redirection for a few seconds (you can adjust the delay)
 
-                    $entityManager->persist($historique);
+                        return $this->redirectToRoute('app_logout', [], Response::HTTP_SEE_OTHER);
 
-                    $user->setPv($user->getPv() - 1);
+                    } else {
+                        $historique = new Historique();
 
-                    /*$userRepository = $this->entityManager->getRepository(User::class);
-                    $usersToDelete = $userRepository->findBy(['pv' => -6]);
-            
-                    foreach ($usersToDelete as $user) {
-                        $this->entityManager->remove($user);
-                        
+                        $historique->setUser($user);
+                        $historique->setMission($classe->getMdj());
+                        $historique->setDateAjoutMdj($classe->getDateAjout());
+                        $historique->setResultat(False);
+
+                        $entityManager->persist($historique);
+
+                        $user->setPv($user->getPv() - 1);
+                        $entityManager->persist($user);
+                        $entityManager->flush();
                     }
-                    $this->entityManager->flush();
-                    //return $this->redirectToRoute('app_logout', [], Response::HTTP_SEE_OTHER);*/
 
-                    $entityManager->persist($user);
 
-                    //echo $user->getPv();
-
+//                    $historique = new Historique();
+//
+//                    $historique->setUser($user);
+//                    $historique->setMission($classe->getMdj());
+//                    $historique->setDateAjoutMdj($classe->getDateAjout());
+//                    $historique->setResultat(False);
+//
+//                    $entityManager->persist($historique);
+//
+//                    $user->setPv($user->getPv() - 1);
+//                    if ($user->getPv()<= 0){
+//
+//                        $historiqueRepository->deleteEntriesByUser($user);
+//                        $entityManager->remove($user);
+//                        $entityManager->flush();
+////                        return $this->redirectToRoute('app_logout', [], Response::HTTP_SEE_OTHER);
+//                    }
+//                    else{
+//
+//                        var_dump($user->getPv());
+//                        $entityManager->persist($user);
+//                        $entityManager->flush();
+//
+//                    }
+//
                     $entityManager->flush();
 
-                    $this->addFlash('danger', "tu n'as validé ta mission à temps");
+                    $this->addFlash('danger', "tu n'as validé ta mission à temps, il te reste: " .$user->getPv()." points de vie");
                 }
                 else{
                     $this->addFlash('réussit', "La mission précédente à bien été validé");

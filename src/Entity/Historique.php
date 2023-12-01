@@ -14,7 +14,7 @@ class Historique
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToOne(inversedBy: 'historiques')]
+    #[ORM\ManyToOne(inversedBy: 'historiques', cascade: ['persist', 'remove'])]
     private ?User $user = null;
 
     #[ORM\ManyToOne(inversedBy: 'historiques')]

@@ -48,6 +48,21 @@ class HistoriqueRepository extends ServiceEntityRepository
 
         return $result[0]['count'] > 0;
     }
+
+    /**
+     * Supprime toutes les lignes d'historique pour un utilisateur donné.
+     *
+     * @param User $user
+     */
+    public function deleteEntriesByUser(User $user): void
+    {
+        $this->createQueryBuilder('h')
+            ->delete()
+            ->andWhere('h.user = :user')
+            ->setParameter('user', $user)
+            ->getQuery()
+            ->execute();
+    }
 //    /**
 //     * @return Historique[] Returns an array of Historique objects
 //     */
