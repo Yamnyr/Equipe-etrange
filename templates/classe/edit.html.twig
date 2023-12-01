@@ -3,11 +3,16 @@
 {% block title %}Edit Classe{% endblock %}
 
 {% block body %}
-    <h1>Edit Classe</h1>
 
-    {{ include('classe/_form.html.twig', {'button_label': 'Update'}) }}
+<div class="p-4">
+    <div class="table">
+        <h1 class="h3 mb-3 fw-bold">Modifier la classe: {{ classe.nom }}</h1>
 
-    <a href="{{ path('app_classe_index') }}">back to list</a>
+        {{ include('classe/_form.html.twig', {'button_label': 'modifier'}) }}
 
-    {{ include('classe/_delete_form.html.twig') }}
+        <a class="btn btn-secondary"  href="{{ path('app_classe_index') }}">retour</a>
+
+        {{ include('classe/_delete_form.html.twig') }}
+    </div>
+</div>
 {% endblock %}

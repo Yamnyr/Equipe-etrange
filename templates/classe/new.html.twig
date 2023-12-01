@@ -3,9 +3,14 @@
 {% block title %}New Classe{% endblock %}
 
 {% block body %}
-    <h1>Create new Classe</h1>
 
-    {{ include('classe/_form.html.twig') }}
+<div class="p-4">
+    <div class="table">
+        <h1 class="h3 mb-3 fw-bold">Ajouter une classe</h1>
 
-    <a href="{{ path('app_classe_index') }}">back to list</a>
+        {{ include('classe/_form.html.twig') }}
+
+        <a class="btn btn-secondary" href="{{ path('app_classe_index') }}">retour</a>
+    </div>
+</div>
 {% endblock %}

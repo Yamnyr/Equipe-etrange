@@ -9,7 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ClassesController extends AbstractController
 {
-    #[Route('/classes', name: 'app_classes')]
+    #[Route('/', name: 'app_classes')]
     public function index(ClasseRepository $classeRepository): Response
     {
         $classes = $classeRepository->findAll();

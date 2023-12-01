@@ -3,9 +3,14 @@
 {% block title %}New Mission{% endblock %}
 
 {% block body %}
-    <h1>Create new Mission</h1>
 
-    {{ include('mission/_form.html.twig') }}
+<div class="p-4">
+    <div class="table">
+        <h1 class="h3 mb-3 fw-bold">Ajouter une mission</h1>
 
-    <a href="{{ path('app_mission_index') }}">back to list</a>
+        {{ include('mission/_form.html.twig') }}
+
+        <a class="btn btn-secondary"  href="{{ path('app_mission_index') }}">retour</a>
+    </div>
+</div>
 {% endblock %}

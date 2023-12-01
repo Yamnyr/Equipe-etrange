@@ -9,8 +9,35 @@
 </style>
 
 <div class="example-wrapper">
-    <h1>{{ classe.mdj.nom }}</h1>
-    {{ classe.mdj.description }}
-    <a class="btn btn-primary" href="{{ path('app_mdj_valid', {'id': classe.id}) }}">Validé</a>
+
+    <h1 class="h3 mb-3 fw-bold">Mission du jour:</h1>
+    <div class="card mt-5" style="max-width: 680px;">
+        <div class="row g-0">
+            <div class="col-md-10">
+                <div class="card-body">
+                    <h2 class="card-title">{{ classe.mdj.nom }}</h2>
+                    <p class="card-text">{{ classe.mdj.description }}</p>
+                    <h6 class="card-text"><small>{{ classe }}</small></h6>
+                </div>
+            </div>
+            <div class="col-md-2 d-flex align-items-stretch">
+                <a class="btn btn-success w-100 d-flex flex-column justify-content-center" href="{{ path('app_mdj_valid', {'id': classe.id}) }}">
+                    Validé
+                </a>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+{#    <h1>{{ classe.mdj.nom }}</h1>#}
+{#    {{ classe.mdj.description }}#}
+{#    <a class="btn btn-primary" href="{{ path('app_mdj_valid', {'id': classe.id}) }}">Validé</a>#}
 </div>
 {% endblock %}

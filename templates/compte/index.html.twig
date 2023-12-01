@@ -10,12 +10,14 @@
     </style>
 
     <div class="example-wrapper">
-        <h1 class="m-4">Modifier mon compte</h1>
 
+        <h1 class="h3 mb-3 fw-bold">Mon compte</h1>
         {{ form_start(form) }}
         {{ form_widget(form) }}
 
         <button type="submit" class="btn btn-primary">Enregister</button>
+
+        PV: <span class="btn btn-success mx-2">{{ user.pv }}</span>
         {{ form_end(form) }}
     </div>
 {% endblock %}

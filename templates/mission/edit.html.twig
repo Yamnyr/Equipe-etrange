@@ -3,11 +3,15 @@
 {% block title %}Edit Mission{% endblock %}
 
 {% block body %}
-    <h1>Edit Mission</h1>
+<div class="p-4">
+    <div class="table">
+        <h1 class="h3 mb-3 fw-bold">Modifier la mission: {{ mission.nom }}</h1>
 
-    {{ include('mission/_form.html.twig', {'button_label': 'Update'}) }}
+        {{ include('mission/_form.html.twig', {'button_label': 'modifier'}) }}
 
-    <a href="{{ path('app_mission_index') }}">back to list</a>
+        <a class="btn btn-secondary"  href="{{ path('app_mission_index') }}">retour</a>
 
-    {{ include('mission/_delete_form.html.twig') }}
+        {{ include('mission/_delete_form.html.twig') }}
+    </div>
+</div>
 {% endblock %}

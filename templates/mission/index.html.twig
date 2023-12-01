@@ -3,37 +3,46 @@
 {% block title %}Mission index{% endblock %}
 
 {% block body %}
-    <h1>Mission index</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Nom</th>
-                <th>Description</th>
-                <th>Classe</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for mission in missions %}
-            <tr>
-                <td>{{ mission.id }}</td>
-                <td>{{ mission.nom }}</td>
-                <td>{{ mission.description }}</td>
-                <td>{{ mission.classe }}</td>
-                <td>
-                    <a href="{{ path('app_mission_show', {'id': mission.id}) }}">show</a>
-                    <a href="{{ path('app_mission_edit', {'id': mission.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="4">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+<div class="p-4">
 
-    <a href="{{ path('app_mission_new') }}">Create new</a>
+    <h1 class="h3 mb-3 fw-bold">Liste des missions</h1>
+        <div class="table">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Nom</th>
+                        <th>Description</th>
+                        <th>Classe</th>
+                        <th>actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for mission in missions %}
+                    <tr>
+                        <td>{{ mission.id }}</td>
+                        <td>{{ mission.nom }}</td>
+                        <td>
+                            {{ mission.description | slice(0, 50) }}
+                            {% if mission.description | length > 50 %}
+                                ...
+                            {% endif %}
+                        </td>
+                        <td>{{ mission.classe }}</td>
+                        <td>
+                            <a class="btn btn-secondary" href="{{ path('app_mission_show', {'id': mission.id}) }}">voir</a>
+                            <a class="btn btn-secondary" href="{{ path('app_mission_edit', {'id': mission.id}) }}">modifier</a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="4">no records found</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    <a class="btn btn-primary" href="{{ path('app_mission_new') }}">Ajouter une mission</a>
+</div>
 {% endblock %}

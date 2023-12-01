@@ -9,7 +9,7 @@
 </style>
 
 <div class="example-wrapper">
-    <h1>Register</h1>
+    <h1 class="h3 mb-3 fw-bold">S'inscrire</h1>
 
     {{ form_errors(registrationForm) }}
 
@@ -20,7 +20,7 @@
         }) }}
         {{ form_row(registrationForm.classe) }}
 
-        <button type="submit" class="btn">Register</button>
+        <button type="submit" class="btn btn-primary">S'inscrire</button>
     {{ form_end(registrationForm) }}
 </div>
 {% endblock %}

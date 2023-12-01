@@ -3,32 +3,36 @@
 {% block title %}Mission{% endblock %}
 
 {% block body %}
-    <h1>Mission</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ mission.id }}</td>
-            </tr>
-            <tr>
-                <th>Nom</th>
-                <td>{{ mission.nom }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ mission.description }}</td>
-            </tr>
-            <tr>
-                <th>Classe</th>
-                <td>{{ mission.classe }}</td>
-            </tr>
-        </tbody>
-    </table>
+<div class="p-4">
 
-    <a href="{{ path('app_mission_index') }}">back to list</a>
+    <h1 class="h3 mb-3 fw-bold">{{ mission.nom }}</h1>
+        <div class="table">
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <th>Id</th>
+                        <td>{{ mission.id }}</td>
+                    </tr>
+                    <tr>
+                        <th>Nom</th>
+                        <td>{{ mission.nom }}</td>
+                    </tr>
+                    <tr>
+                        <th>Description</th>
+                        <td>{{ mission.description }}</td>
+                    </tr>
+                    <tr>
+                        <th>Classe</th>
+                        <td>{{ mission.classe }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    <a class="btn btn-secondary" href="{{ path('app_mission_index') }}">retour</a>
 
-    <a href="{{ path('app_mission_edit', {'id': mission.id}) }}">edit</a>
+    <a class="btn btn-secondary"  href="{{ path('app_mission_edit', {'id': mission.id}) }}">modifier</a>
 
     {{ include('mission/_delete_form.html.twig') }}
+</div>
 {% endblock %}
