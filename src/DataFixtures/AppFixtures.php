@@ -146,11 +146,11 @@ class AppFixtures extends Fixture
         $mission5->setClasse($classe1);
         $manager->persist($mission5);
 
-        $mission5 = new Mission();
-        $mission5->setNom('Jeu de Chaises Furtif');
-        $mission5->setDescription('Change de place à chaque fois que le professeur détourne le regard, en essayant de ne pas te faire prendre.');
-        $mission5->setClasse($classe1);
-        $manager->persist($mission5);
+        $mission12 = new Mission();
+        $mission12->setNom('Jeu de Chaises Furtif');
+        $mission12->setDescription('Change de place à chaque fois que le professeur détourne le regard, en essayant de ne pas te faire prendre.');
+        $mission12->setClasse($classe1);
+        $manager->persist($mission12);
 
 
 
@@ -185,11 +185,11 @@ class AppFixtures extends Fixture
         $mission10->setClasse($classe2);
         $manager->persist($mission10);
 
-        $mission10 = new Mission();
-        $mission10->setNom('Citations Célèbres Décalées');
-        $mission10->setDescription('Réponds à chaque question avec une citation célèbre, même si elle n\'a aucun lien avec la question posée.');
-        $mission10->setClasse($classe2);
-        $manager->persist($mission10);
+        $mission11 = new Mission();
+        $mission11->setNom('Citations Célèbres Décalées');
+        $mission11->setDescription('Réponds à chaque question avec une citation célèbre, même si elle n\'a aucun lien avec la question posée.');
+        $mission11->setClasse($classe2);
+        $manager->persist($mission11);
 
         /*$mission11 = new Mission();
         $mission11->setNom('Organiser une réunion de planification :');
