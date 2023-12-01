@@ -49,7 +49,7 @@ class AppFixtures extends Fixture
                 'eleves.admin'
             )
         );
-        $user1->setClasse($classe1);
+        $user1->setClasse($classe2);
         $manager->persist($user1);
 
         $user2 = new User();
@@ -62,7 +62,7 @@ class AppFixtures extends Fixture
                 'enseignants.admin'
             )
         );
-        $user2->setClasse($classe2);
+        $user2->setClasse($classe1);
         $manager->persist($user2);
 
         $user3 = new User();
