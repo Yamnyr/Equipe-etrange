@@ -21,51 +21,51 @@ class AppFixtures extends Fixture
 
         // Création d'une classe
         $classe1 = new Classe();
-        $classe1->setNom('Enseignants');
-        $classe1->setImage('images/enseignants.png');
-        $classe1->setDescription('Les enseignants.');
+        $classe1->setNom('Développement');
+        $classe1->setImage('images/developpement.jpg');
+        $classe1->setDescription('Les Développeurs.');
         $manager->persist($classe1);
 
         $classe2 = new Classe();
-        $classe2->setNom('Elèves');
-        $classe2->setImage('images/eleves.png');
-        $classe2->setDescription('Les élèves.');
+        $classe2->setNom('Reseaux');
+        $classe2->setImage('images/reseaux.jpg');
+        $classe2->setDescription('Les Réseaux.');
         $manager->persist($classe2);
 
-        $classe3 = new Classe();
+        /*$classe3 = new Classe();
         $classe3->setNom('Administration');
         $classe3->setImage('images/administration.png');
         $classe3->setDescription('L\'administration.');
-        $manager->persist($classe3);
+        $manager->persist($classe3);*/
 
 
         $user1 = new User();
-        $user1->setEmail('eleves@admin');
+        $user1->setEmail('dev@admin');
         $user1->setPv(3);
         $user1->setRoles(array('ROLE_ADMIN'));
         $user1->setPassword(
             $this->password->hashPassword(
                 $user1,
-                'eleves.admin'
+                'dev.admin'
             )
         );
-        $user1->setClasse($classe2);
+        $user1->setClasse($classe1);
         $manager->persist($user1);
 
         $user2 = new User();
-        $user2->setEmail('enseignants@admin');
+        $user2->setEmail('res@admin');
         $user2->setPv(3);
         $user2->setRoles(array('ROLE_ADMIN'));
         $user2->setPassword(
             $this->password->hashPassword(
                 $user2,
-                'enseignants.admin'
+                'res.admin'
             )
         );
-        $user2->setClasse($classe1);
+        $user2->setClasse($classe2);
         $manager->persist($user2);
 
-        $user3 = new User();
+        /*$user3 = new User();
         $user3->setEmail('admin@admin');
         $user3->setPv(3);
         $user3->setRoles(array('ROLE_ADMIN'));
@@ -76,33 +76,33 @@ class AppFixtures extends Fixture
             )
         );
         $user3->setClasse($classe3);
-        $manager->persist($user3);
+        $manager->persist($user3);*/
 
         $user4 = new User();
-        $user4->setEmail('eleves@user');
+        $user4->setEmail('dev@user');
         $user4->setPv(3);
         $user4->setPassword(
             $this->password->hashPassword(
                 $user1,
-                'eleves.user'
+                'dev.user'
             )
         );
         $user4->setClasse($classe1);
         $manager->persist($user4);
 
         $user5 = new User();
-        $user5->setEmail('enseignants@user');
+        $user5->setEmail('res@user');
         $user5->setPv(3);
         $user5->setPassword(
             $this->password->hashPassword(
                 $user2,
-                'enseignants.user'
+                'res.user'
             )
         );
         $user5->setClasse($classe2);
         $manager->persist($user5);
 
-        $user6 = new User();
+        /*$user6 = new User();
         $user6->setEmail('admin@user');
         $user6->setPv(3);
         $user6->setPassword(
@@ -112,7 +112,7 @@ class AppFixtures extends Fixture
             )
         );
         $user6->setClasse($classe3);
-        $manager->persist($user6);
+        $manager->persist($user6);*/
 
         
 
@@ -176,7 +176,7 @@ class AppFixtures extends Fixture
         $mission10->setClasse($classe2);
         $manager->persist($mission10);
 
-        $mission11 = new Mission();
+        /*$mission11 = new Mission();
         $mission11->setNom('Organiser une réunion de planification :');
         $mission11->setDescription("Coordonner les activités pédagogiques du mois en cours, définir les priorités et allouer les ressources nécessaires.");
         $mission11->setClasse($classe3);
@@ -204,7 +204,7 @@ class AppFixtures extends Fixture
         $mission15->setNom('Analyser les dossiers scolaires :');
         $mission15->setDescription("Examiner 10 dossiers de performance scolaire, identifier les problèmes, et proposer des ajustements stratégiques pour améliorer l'apprentissage des élèves.");
         $mission15->setClasse($classe3);
-        $manager->persist($mission15);
+        $manager->persist($mission15);*/
 
 
         $manager->flush();
