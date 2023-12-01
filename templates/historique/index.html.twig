@@ -23,8 +23,10 @@
             <tr>
                 <td>{{ historique.id }}</td>
                 <td>{{ historique.user }}</td>
-                <td>{{ historique.mission }}</td>
-                <td>{{ historique.resultat ? 'Yes' : 'No' }}</td>
+                <td>{{ historique.mission }}</td><td class="{{ historique.resultat ? 'text-success' : 'text-danger' }}">
+                    {{ historique.resultat ? 'Yes' : 'No' }}
+                </td>
+
                 <td>{{ historique.dateAjoutMdj ? historique.dateAjoutMdj|date('Y-m-d H:i:s') : '' }}</td>
 {#                <td>
                     <a href="{{ path('app_historique_show', {'id': historique.id}) }}">show</a>
