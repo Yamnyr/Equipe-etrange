@@ -3,8 +3,10 @@
 namespace App\DataFixtures;
 
 use App\Entity\Classe;
+use App\Entity\Historique;
 use App\Entity\Mission;
 use App\Entity\User;
+use DateTime;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -221,6 +223,26 @@ class AppFixtures extends Fixture
         $mission15->setClasse($classe3);
         $manager->persist($mission15);*/
 
+        $historique1 = new Historique();
+        $historique1->setUser($user4);
+        $historique1->setMission($mission5);
+        $historique1->setResultat(1);
+        $historique1->setDateAjoutMdj(new DateTime());
+        $manager->persist($historique1);
+
+        $historique2 = new Historique();
+        $historique2->setUser($user4);
+        $historique2->setMission($mission4);
+        $historique2->setResultat(1);
+        $historique2->setDateAjoutMdj(new DateTime());
+        $manager->persist($historique2);
+
+        $historique3 = new Historique();
+        $historique3->setUser($user5);
+        $historique3->setMission($mission11);
+        $historique3->setResultat(1);
+        $historique3->setDateAjoutMdj(new DateTime());
+        $manager->persist($historique3);
 
         $manager->flush();
     }
