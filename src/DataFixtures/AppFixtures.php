@@ -41,7 +41,7 @@ class AppFixtures extends Fixture
 
         $user1 = new User();
         $user1->setEmail('dev@admin');
-        $user1->setPv(3);
+        $user1->setPv(30);
         $user1->setRoles(array('ROLE_ADMIN'));
         $user1->setPassword(
             $this->password->hashPassword(
@@ -55,7 +55,7 @@ class AppFixtures extends Fixture
         $user2 = new User();
         $user2->setEmail('res@admin');
         $user2->setPv(3);
-        $user2->setRoles(array('ROLE_ADMIN'));
+        $user2->setRoles(array('ROLE_USER'));
         $user2->setPassword(
             $this->password->hashPassword(
                 $user2,
@@ -117,62 +117,77 @@ class AppFixtures extends Fixture
         
 
         $mission1 = new Mission();
-        $mission1->setNom('Concevoir des leçons innovantes :');
-        $mission1->setDescription('Créer et planifier 3 leçons stimulantes qui intègrent des approches pédagogiques novatrices.');
+        $mission1->setNom('Entrée Théâtrale Épique');
+        $mission1->setDescription('Fais une entrée théâtrale à chaque fois que tu entres en classe, avec une musique de fond dramatique.');
         $mission1->setClasse($classe1);
         $manager->persist($mission1);
 
         $mission2 = new Mission();
-        $mission2->setNom('Évaluer des copies :');
-        $mission2->setDescription('Examiner et évaluer 20 copies d\'examens pour fournir des retours constructifs aux élèves.');
+        $mission2->setNom('Mystère en Classe');
+        $mission2->setDescription('Amène un objet mystérieux en classe et refuse de dire ce que c\'est, en créant des théories farfelues à son sujet.');
         $mission2->setClasse($classe1);
         $manager->persist($mission2);
         
         $mission3 = new Mission();
-        $mission3->setNom('Organiser un débat éducatif :');
-        $mission3->setDescription('Faciliter un débat entre les élèves sur un sujet d\'actualité, encourageant la pensée critique.');
+        $mission3->setNom('Célébration Spontanée');
+        $mission3->setDescription('Organise une mini-célébration à chaque fois que quelqu\'un prend la parole en classe, avec des applaudissements et des confettis');
         $mission3->setClasse($classe1);
         $manager->persist($mission3);
 
         $mission4 = new Mission();
-        $mission4->setNom('Mettre un 20/20 au groupe 3 :');
-        $mission4->setDescription('Mettre un 20/20 sur le projet du groupe 3 (svp) #lesmeilleurs.');
+        $mission4->setNom('Doigts Claquants Jazz');
+        $mission4->setDescription('Commence chaque phrase en claquant des doigts et en disant "Oh, yeah!" à la manière d\'un artiste de jazz.');
         $mission4->setClasse($classe1);
         $manager->persist($mission4);
-        
+
         $mission5 = new Mission();
-        $mission5->setNom('Répondre aux courriels étudiants :');
-        $mission5->setDescription('Répondre aux questions des étudiants et fournir des conseils personnalisés par le biais de la correspondance électronique.');
+        $mission5->setNom('Symphonie Royale en Silence');
+        $mission5->setDescription('en cours pendant un silence met l\'opening de clash royal');
         $mission5->setClasse($classe1);
         $manager->persist($mission5);
+
+        $mission5 = new Mission();
+        $mission5->setNom('Jeu de Chaises Furtif');
+        $mission5->setDescription('Change de place à chaque fois que le professeur détourne le regard, en essayant de ne pas te faire prendre.');
+        $mission5->setClasse($classe1);
+        $manager->persist($mission5);
+
+
+
         
         $mission6 = new Mission();
-        $mission6->setNom('Participer aux activités d\'apprentissage collaboratif :');
-        $mission6->setDescription('Participer activement à 3 activités en groupe pour favoriser la collaboration et l\'apprentissage mutuel.');
+        $mission6->setNom('"Arc-en-ciel Éducatif');
+        $mission6->setDescription('Écris tous tes cours avec un stylo de couleur différente pour chaque mot.');
         $mission6->setClasse($classe2);
         $manager->persist($mission6);
         
         $mission7 = new Mission();
-        $mission7->setNom('Explorer de nouveaux sujets :');
-        $mission7->setDescription('Se plonger dans 2 sujets nouveaux ou inexplorés pour stimuler la curiosité intellectuelle.');
+        $mission7->setNom('Perruque en Fête');
+        $mission7->setDescription('Utilise une perruque excentrique pendant toute une journée en classe.');
         $mission7->setClasse($classe2);
         $manager->persist($mission7);
         
         $mission8 = new Mission();
-        $mission8->setNom('Présenter un projet créatif :');
-        $mission8->setDescription('Concevoir et présenter un projet créatif démontrant la compréhension approfondie d\'un concept.');
+        $mission8->setNom('Le Grand Déplacement');
+        $mission8->setDescription('en cours, deplace ta table et ta chaise le plus de fois possible');
         $mission8->setClasse($classe2);
         $manager->persist($mission8);
         
         $mission9 = new Mission();
-        $mission9->setNom('Rédiger des article :');
-        $mission9->setDescription('Écrire deux articles sur des sujets choisis pour développer la capacité à communiquer de manière claire et concise.');
+        $mission9->setNom('Langage XVIIIe Siècle');
+        $mission9->setDescription('Utilise uniquement des expressions du 18e siècle pendant toute une journée en classe.');
         $mission9->setClasse($classe2);
         $manager->persist($mission9);
 
         $mission10 = new Mission();
-        $mission10->setNom('Arriver à l\'heure :');
-        $mission10->setDescription('Tout simplement.');
+        $mission10->setNom('Sac Absurde Spectaculaire');
+        $mission10->setDescription('vien en cours avec le sac le plus aburde.');
+        $mission10->setClasse($classe2);
+        $manager->persist($mission10);
+
+        $mission10 = new Mission();
+        $mission10->setNom('Citations Célèbres Décalées');
+        $mission10->setDescription('Réponds à chaque question avec une citation célèbre, même si elle n\'a aucun lien avec la question posée.');
         $mission10->setClasse($classe2);
         $manager->persist($mission10);
 

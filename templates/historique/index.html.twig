@@ -24,7 +24,7 @@
                 <td>{{ historique.id }}</td>
                 <td>{{ historique.user }}</td>
                 <td>{{ historique.mission }}</td><td class="{{ historique.resultat ? 'text-success' : 'text-danger' }}">
-                    {{ historique.resultat ? 'Yes' : 'No' }}
+                    {{ historique.resultat ? 'Validé' : 'Raté' }}
                 </td>
 
                 <td>{{ historique.dateAjoutMdj ? historique.dateAjoutMdj|date('Y-m-d H:i:s') : '' }}</td>
