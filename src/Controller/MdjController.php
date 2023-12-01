@@ -25,14 +25,14 @@ class MdjController extends AbstractController
         $mdj = $classe ? $classe->getMdj() : null;
         $dateajout = $classe ? $classe->getDateAjout() : null;
 
-        if ($mdj === null || (new \DateTime())->diff($dateajout)->s > 3) {
+        $status = false;
+        if ($mdj === null || (new \DateTime())->diff($dateajout)->s > 10) {
 
 
             $hist = $historiqueRepository->findBy(['user' => $user]);
             //si la mission du jour n'est pas set
             if ($classe !== null && $classe->getMdj() !== null) {
-//dd($historiqueRepository->doesEntryExist($user, $classe->getMdj(), $classe->getDateAjout()));
-//                var_dump(!$historiqueRepository->doesEntryExist($user, $classe->getMdj(), $classe->getDateAjout()));
+
                 if (empty($hist) || !$historiqueRepository->doesEntryExist($user, $classe->getMdj(), $classe->getDateAjout())) {
                     $historique = new Historique();
 
@@ -50,6 +50,9 @@ class MdjController extends AbstractController
 
                     $this->addFlash('danger', "tu n'as validé ta mission à temps");
                 }
+                else{
+                    $this->addFlash('réussit', "La mission précédente à bien été validé");
+                }
             }
 
             $relatedMissions = $missionRepository->findBy(['classe' => $classe]);
@@ -65,9 +68,9 @@ class MdjController extends AbstractController
             }
         }
 
-
         return $this->render('mdj/index.html.twig', [
             'classe' => $classe,
+            'status' => $status,
         ]);
     }
 
@@ -77,7 +80,6 @@ class MdjController extends AbstractController
         $user = $this->getUser();
 
         $classe = $user ? $user->getClasse() : null;
-        var_dump(!$historiqueRepository->doesEntryExist($user, $classe->getMdj(), $classe->getDateAjout()));
         if (!$historiqueRepository->doesEntryExist($user, $classe->getMdj(), $classe->getDateAjout())) {
             $classe = $classeRepository->find($id);
             $historique = new Historique();
@@ -90,6 +92,9 @@ class MdjController extends AbstractController
             $entityManager->persist($historique);
             $entityManager->flush();
             $this->addFlash('réussit', "La mission a été validé");
+        }
+        else{
+            $this->addFlash('réussit', "tu as déja validé cette mission");
         }
         return $this->redirectToRoute('app_mdj', [], Response::HTTP_SEE_OTHER);
     }
