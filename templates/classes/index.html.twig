@@ -15,7 +15,9 @@
         /* Ajoute la propriété pour centrer horizontalement les div */
         .card-container { margin: 0 auto; }
     </style>
-
+    {% for historiqueCount in historiqueCounts %}
+        {{ historiqueCount.count }} missions réussies pour la classe {{ historiqueCount.classId }}
+    {% endfor %}
     <div class="card-container">
         <h1 class="h3 mb-3 fw-bold">Liste des Classes</h1>
         <div class="justify-content-between d-flex" style="margin: 50px 400px 0 400px">
@@ -25,6 +27,11 @@
                 <div class="card-body">
                     <h3 class="card-text">{{ classe.nom }}</h3>
                     <p>{{ classe.description }}</p>
+                    {% if app.user is not null %}
+                        {% if historiqueCounts[classe.id-1] is defined %}
+                            <p>{{ historiqueCounts[classe.id-1].count }} missions réussies</p>
+                        {% endif %}
+                    {%  endif %}
                 </div>
             </div>
         {% endfor %}

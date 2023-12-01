@@ -63,6 +63,35 @@ class HistoriqueRepository extends ServiceEntityRepository
             ->getQuery()
             ->execute();
     }
+
+
+
+
+    public function countSuccessfulMissionsForClass(int $classId): int
+    {
+        return $this->createQueryBuilder('h')
+            ->select('COUNT(h.id)')
+            ->innerJoin('h.mission', 'm')
+            ->where('m.classe = :classId')
+            ->andWhere('h.resultat = 1')
+            ->setParameter('classId', $classId)
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
+    public function countSuccessfulMissionsForClass2(): array
+    {
+        return $this->createQueryBuilder('h')
+            ->select('COUNT(h.id) AS count', 'IDENTITY(m.classe) AS classId')
+            ->innerJoin('h.mission', 'm')
+            ->where('h.resultat = 1')
+            ->groupBy('m.classe')
+            ->getQuery()
+            ->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+    }
+
+
+
 //    /**
 //     * @return Historique[] Returns an array of Historique objects
 //     */
