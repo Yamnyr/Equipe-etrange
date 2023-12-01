@@ -26,7 +26,7 @@ class MdjController extends AbstractController
         $dateajout = $classe ? $classe->getDateAjout() : null;
 
         $status = false;
-        if ($mdj === null || (new \DateTime())->diff($dateajout)->s > 10) {
+        if ($mdj === null || (new \DateTime())->diff($dateajout)->s > 15) {
 
 
             $hist = $historiqueRepository->findBy(['user' => $user]);
