@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Form\CompteFormType;
 use App\Form\ProfileType;
 use App\Form\UserType;
+use App\Repository\HistoriqueRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -42,6 +43,17 @@ class CompteController extends AbstractController
         return $this->render('compte/index.html.twig', [
             'user' => $user,
             'form' => $form,
+        ]);
+    }
+
+    #[Route('/profile/historique', name: 'app_compte_historique', methods: ['GET', 'POST'])]
+    public function historiqueProfile(HistoriqueRepository $historiqueRepository, Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
+    {
+        $user = $this->getUser();
+        $userId = $user->getId();
+        $historiques = $historiqueRepository->findBy(['user' => $userId]);
+        return $this->render('historique/index.html.twig', [
+            'historiques' => $historiques,
         ]);
     }
 }
