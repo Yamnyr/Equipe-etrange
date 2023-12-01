@@ -40,41 +40,81 @@ class AppFixtures extends Fixture
 
 
         $user1 = new User();
-        $user1->setEmail('admin@admin');
+        $user1->setEmail('eleves@admin');
         $user1->setPv(3);
         $user1->setRoles(array('ROLE_ADMIN'));
         $user1->setPassword(
             $this->password->hashPassword(
                 $user1,
-                'test'
+                'eleves.admin'
             )
         );
-        $user1->setClasse($classe2);
+        $user1->setClasse($classe1);
         $manager->persist($user1);
 
         $user2 = new User();
-        $user2->setEmail('test@test');
+        $user2->setEmail('enseignants@admin');
         $user2->setPv(3);
+        $user2->setRoles(array('ROLE_ADMIN'));
         $user2->setPassword(
             $this->password->hashPassword(
                 $user2,
-                'test'
+                'enseignants.admin'
             )
         );
         $user2->setClasse($classe2);
         $manager->persist($user2);
 
         $user3 = new User();
-        $user3->setEmail('test2@test');
+        $user3->setEmail('admin@admin');
         $user3->setPv(3);
+        $user3->setRoles(array('ROLE_ADMIN'));
         $user3->setPassword(
             $this->password->hashPassword(
                 $user3,
-                'test'
+                'admin.admin'
             )
         );
         $user3->setClasse($classe3);
         $manager->persist($user3);
+
+        $user4 = new User();
+        $user4->setEmail('eleves@user');
+        $user4->setPv(3);
+        $user4->setPassword(
+            $this->password->hashPassword(
+                $user1,
+                'eleves.user'
+            )
+        );
+        $user4->setClasse($classe1);
+        $manager->persist($user4);
+
+        $user5 = new User();
+        $user5->setEmail('enseignants@user');
+        $user5->setPv(3);
+        $user5->setPassword(
+            $this->password->hashPassword(
+                $user2,
+                'enseignants.user'
+            )
+        );
+        $user5->setClasse($classe2);
+        $manager->persist($user5);
+
+        $user6 = new User();
+        $user6->setEmail('admin@user');
+        $user6->setPv(3);
+        $user6->setPassword(
+            $this->password->hashPassword(
+                $user3,
+                'admin.user'
+            )
+        );
+        $user6->setClasse($classe3);
+        $manager->persist($user6);
+
+        
 
         $mission1 = new Mission();
         $mission1->setNom('Concevoir des leçons innovantes :');
