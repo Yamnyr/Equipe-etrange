@@ -61,7 +61,7 @@
         "recreate-db": [
 
             "echo Dropping database...",
-            "php bin/console doctrine:database:drop --force",
+            "php bin/console doctrine:database:drop --if-exists --force",
             "echo Creating database...",
             "php bin/console doctrine:database:create",
             "echo Running migrations...",
